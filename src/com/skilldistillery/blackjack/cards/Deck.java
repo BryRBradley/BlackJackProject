@@ -6,11 +6,10 @@ import java.util.List;
 
 public class Deck {
 
-	private List<Card> Cards;
+	private List<Card> cards;
 
 	public Deck() {
-
-		setCards(createDeck());
+		cards = createDeck();
 	}
 
 	private List<Card> createDeck() {
@@ -25,19 +24,19 @@ public class Deck {
 	}
 
 	public List<Card> getCards() {
-		return Cards;
+		return cards;
 	}
 
 	public int checkDeckSize() {
-		return Cards.size();
+		return cards.size();
 	}
 
 	public void shuffle() {
-		Collections.shuffle(Cards);
+		Collections.shuffle(cards);
 	}
 
 	public Card dealCard() {
-		return Cards.remove(0);
+		return cards.remove(0);
 
 	}
 
@@ -46,7 +45,7 @@ public class Deck {
 	}
 
 	public void setCards(List<Card> cards) {
-		Cards = cards;
+		cards = cards;
 	}
 
 }

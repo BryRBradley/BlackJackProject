@@ -10,15 +10,21 @@ public abstract class Hand {
 		cardsInHand.add(card);
 	}
 
-	public abstract int getHandValue();
+////	public void clearHand(List<Card> cardsInHand) {
+//		ArrayList arrayList = new ArrayList();
+//		// cardsInHand.removeAll(cardsInHand);
+//		arrayList.clear();
+//	}
 
-	public String showDealerCard() {
-		String dealersSecondCard = "Dealers Second Card" + cardsInHand.get(0).toString();
-		return dealersSecondCard;
-	}
+//	public void removeAllCard(Card card) {
+//		cardsInHand.removeAll((Collection<?>) card);
+//	}
+
+	public abstract int getHandValue();
 
 	@Override
 	public String toString() {
 		return "Hand [cardsInHand=" + cardsInHand + "]";
 	}
+
 }

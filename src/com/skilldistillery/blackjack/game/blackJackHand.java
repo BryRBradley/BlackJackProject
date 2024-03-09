@@ -1,10 +1,17 @@
 package com.skilldistillery.blackjack.game;
 
+import com.skilldistillery.blackjack.cards.Card;
 import com.skilldistillery.blackjack.cards.Hand;
 
-public class blackJackHand extends Hand {
+public class BlackJackHand extends Hand {
 
 	public int getHandValue() {
+		// add up the rank of all the cards in hand
+		int totalHandValue = 0;
+		for (Card card : cardsInHand) {
+			totalHandValue = totalHandValue + card.getValue();
+		}
+		return totalHandValue;
 // How super.cardInHand.get(0).getvalue(); but it has to be different.
 	}
 
@@ -24,11 +31,6 @@ public class blackJackHand extends Hand {
 		} else {
 			return false;
 		}
-
-	}
-
-	public int getDealerHandValue() {
-		return super.cardsInHand.get(0).getValue();
 
 	}
 

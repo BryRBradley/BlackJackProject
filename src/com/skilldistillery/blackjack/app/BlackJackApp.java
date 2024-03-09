@@ -3,15 +3,16 @@ package com.skilldistillery.blackjack.app;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
-import com.skilldistillery.blackjack.cards.Deck;
-import com.skilldistillery.blackjack.game.blackJackHand;
+import com.skilldistillery.blackjack.game.Dealer;
+import com.skilldistillery.blackjack.game.Player;
 
 public class BlackJackApp {
 
 	Scanner kb = new Scanner(System.in);
 	boolean gameRunning;
-	blackJackHand user;
-	blackJackHand dealer;
+	Player player = new Player();
+	Dealer dealer = new Dealer();
+
 // initiate the deck, deal cards to player and dealer
 //	p=2c both up d=1up 1down. p chooses to hit or stay till stay. if(player busts = loose) 
 // dealer displays card two and plays until at least = 17.
@@ -38,40 +39,74 @@ public class BlackJackApp {
 				startGame();
 			}
 		} catch (InputMismatchException e) {
-			System.out.println("Not a valid number of cards use only whole numbers.");
+			System.out.println("Not a valid selection");
 		} finally {
 			kb.close();
 		}
 	}
 
 	private void startGame() {
-		int roundCount = 1;
+		boolean inGame = true;
+		while (inGame) {
+			int roundCount = 1;
+			boolean gameRunning = true;
+			while (gameRunning) {
+				System.out.println("Round  " + roundCount);
+				dealer.shuffleDeck();
+				dealCards();
+				player.hitOrStay(dealer, kb);
+				dealer.hitOrStay();
+				// if P > D && P <=21 P wins else if D > P && D <= 21 D wins else is a tie
+				if (player.getHandValue() > dealer.getHandValue() && player.getHandValue() <= 21) {
+					System.out.println("Player Wins with" + player.getHandValue());
+					gameRunning = false;
+				} else if (dealer.getHandValue() > player.getHandValue() && dealer.getHandValue() <= 21) {
+					System.out.println("Dealer Wins with" + dealer.getHandValue());
+					gameRunning = false;
+				} else {
+					System.out.println("It's a Tie hand");
+					gameRunning = false;
+				}
+			}
+			// BlackJackHand handOfCards= new BlackJackHand();
+			// BlackJackHand.Hand.removeAllCard(cardsInHand);
 
-		while (gameRunning) {
-			Deck deck = new Deck();
-// ???????? why do you write it this way?
-			deck.shuffle();
-			System.out.println("Round  " + roundCount);
-			dealCards();
-
-			System.out.println("Do you want to play another round Y/N ?\n");
+			System.out.println("\nDo you want to play another round Y/N ?\n");
 			String userQuit = kb.nextLine();
 			if (userQuit.equalsIgnoreCase("N")) {
-				gameRunning = false;
+				inGame = false;
 				System.out.println("Oh good I thought you were getting addicted GOODBYE");
 			}
 			if (userQuit.equalsIgnoreCase("Y")) {
-				gameRunning = true;
+				inGame = true;
 				roundCount = roundCount + 1;
 				System.out.println("Lets deal the cards\n");
 			}
-// ************ while loop end ************			
 		}
-	}
+
+	} // end while
+
+	// end startGame
 
 	private void dealCards() {
 
+		player.addCard(dealer.dealCard());
+		dealer.addCard(dealer.dealCard());
+		player.addCard(dealer.dealCard());
+		dealer.addCard(dealer.dealCard());
+		System.out.println("Your cards: " + player.toString() + " and equal: " + player.getHandValue());
+		System.out.println("The dealer has: " + dealer.toString() + " and equal: " + dealer.getHandValue());
 	}
+
+//	public void isWinner() {
+// if p is == to 21 p has blackjack
+// if p <= 21 and is > d p wins
+//if d <17 and p is <=21 d hits
+// if d <= 21 and d > p d wins
+// if d == to 21 d has black jack 
+// if p == d its a tie 
+
+//	}
 
 	private void displayRules() {
 		System.out.println(
