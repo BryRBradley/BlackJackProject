@@ -41,7 +41,12 @@ public class Deck {
 
 	}
 
+	public void dealCard(Hand hand) {
+		hand.addCard(dealCard());
+	}
+
 	public void setCards(List<Card> cards) {
 		Cards = cards;
 	}
+
 }
