@@ -51,23 +51,25 @@ public class BlackJackApp {
 			int roundCount = 1;
 			boolean gameRunning = true;
 			while (gameRunning) {
-				System.out.println("Round  " + roundCount);
+				System.out.println("\nRound " + roundCount + "\n");
 				dealer.shuffleDeck();
 				dealCards();
 				player.hitOrStay(dealer, kb);
 				dealer.hitOrStay();
 				// if P > D && P <=21 P wins else if D > P && D <= 21 D wins else is a tie
 				if (player.getHandValue() > dealer.getHandValue() && player.getHandValue() <= 21) {
-					System.out.println("Player Wins with" + player.getHandValue());
+					System.out.println("\nPlayer Wins with " + player.getHandValue());
 					gameRunning = false;
 				} else if (dealer.getHandValue() > player.getHandValue() && dealer.getHandValue() <= 21) {
-					System.out.println("Dealer Wins with" + dealer.getHandValue());
+					System.out.println("Dealer Wins with " + dealer.getHandValue());
 					gameRunning = false;
 				} else {
 					System.out.println("It's a Tie hand");
 					gameRunning = false;
 				}
 			}
+			player.clearHand();
+			dealer.clearHand();
 			// BlackJackHand handOfCards= new BlackJackHand();
 			// BlackJackHand.Hand.removeAllCard(cardsInHand);
 
@@ -94,8 +96,8 @@ public class BlackJackApp {
 		dealer.addCard(dealer.dealCard());
 		player.addCard(dealer.dealCard());
 		dealer.addCard(dealer.dealCard());
-		System.out.println("Your cards: " + player.toString() + " and equal: " + player.getHandValue());
-		System.out.println("The dealer has: " + dealer.toString() + " and equal: " + dealer.getHandValue());
+		System.out.println("\nYour cards: " + player.toString() + " and equal: " + player.getHandValue());
+		System.out.println("\nThe dealer has: " + dealer.toString() + " and equal : " + dealer.getHandValue());
 	}
 
 //	public void isWinner() {

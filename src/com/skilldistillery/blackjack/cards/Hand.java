@@ -10,6 +10,10 @@ public abstract class Hand {
 		cardsInHand.add(card);
 	}
 
+	public void clear() {
+		cardsInHand.clear();
+	}
+
 ////	public void clearHand(List<Card> cardsInHand) {
 //		ArrayList arrayList = new ArrayList();
 //		// cardsInHand.removeAll(cardsInHand);
